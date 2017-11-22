@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
+
 const bodyParser = require("body-parser");
 const handlebars = require("express-handlebars");
 let Promise = require("bluebird");
@@ -56,7 +57,7 @@ app.post("/", (req, res) => {
       };
       //allMessages[newMessage[0]] = newMessageObject;
       allMessages.push(newMessageObject);
-      console.log(allMessages);
+      // console.log(allMessages);
       res.render("index", { allMessages: allMessages });
     })
     .catch(error => {
@@ -75,10 +76,9 @@ app.use((err, req, res, next) => {
 });
 
 io.on("connection", client => {
-  client.on("newMessage", () => {
+  client.on("newMessage", test => {
     //find the last added object to redis
     let newestMessage = allMessages[allMessages.length - 1];
-    console.log("NEW MESSAGE :" + newestMessage);
   });
 });
 

@@ -25,10 +25,6 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-// look up how many objects there are in redis
-// create a new value, with digit as key, and hash as value
-// hash keys => author, message
-//
 // 0: {
 //   id: 0
 //   author: anony
@@ -36,7 +32,11 @@ app.get("/", (req, res) => {
 // }
 let totalMessages;
 let message;
-let allMessages = [];
+let allMessages = {};
+
+// allmessage = {
+//
+// }
 
 app.post("/", (req, res) => {
   message = req.body["message"];
@@ -47,22 +47,24 @@ app.post("/", (req, res) => {
       return totalMessages;
     })
     .then(totalMessages => {
-      let newMessage = redisClient.HMSETAsync(totalMessages, {
+      redisClient.HMSETAsync(totalMessages, {
         author: "anonymous",
         message: message,
         id: totalMessages
       });
-      return newMessage;
     })
-    // retrieving all messages form redis database
+    .then(() => {
+      return redisClient.hmgetAsync(totalMessages, "id", "author", "message");
+    })
     .then(newMessage => {
-      let test = redisClient.get(`${totalMessages}`, (err, data) => {
-        if (err) {
-          console.log(err);
-        }
-        console.log(data);
-      });
+      // ["1", "anonymous", "message"]
+      newMessageObject = {
+        id: newMessage[0],
+        author: newMessage[1],
+        message: newMessage[2]
+      };
       allMessages.push(newMessage);
+      console.log(allMessages);
       res.render("index", allMessages);
     })
     .catch(error => {

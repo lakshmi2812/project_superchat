@@ -2,21 +2,23 @@
 <form action='/' method='post'>
   <table>
     <tr>
-    <td><input type="text" name="message"/></td>
-    <td><input type='submit' /></td>
-  </tr>
+      <td><input type="text" name="message" /></td>
+      <td><input type='submit' /></td>
+    </tr>
   </table>
 
 </form>
-{{allMessages}}
 
-<div>
-  {{#each allMessages as |message|}}
+<div id="chat">
+
   <table>
-    <tr>
-    <td>message.message</td>
-    <td>by message.author</td>
-  </tr>
+    {{#each allMessages as |message|}}
+      <tr>
+        <td>message.message</td>
+        <td>by message.author</td>
+      </tr>
+    {{/each}}
   </table>
-  {{/each}}
+
+
 </div>

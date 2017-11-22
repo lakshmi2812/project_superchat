@@ -8,14 +8,15 @@
   </table>
 
 </form>
-
+{{allMessages}}
 <div id="chat">
 
   <table>
-    {{#each allMessages as |message|}}
-      <tr>
-        <td>message.message</td>
-        <td>by message.author</td>
+    {{#each params as |param|}}
+        <tr>
+          <td>param</td>
+          <td>param.message</td>
+          <td>by param.author</td>
       </tr>
     {{/each}}
   </table>

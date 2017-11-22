@@ -32,11 +32,7 @@ app.get("/", (req, res) => {
 // }
 let totalMessages;
 let message;
-let allMessages = {};
-
-// allmessage = {
-//
-// }
+let allMessages = [];
 
 app.post("/", (req, res) => {
   message = req.body["message"];
@@ -58,14 +54,19 @@ app.post("/", (req, res) => {
     })
     .then(newMessage => {
       // ["1", "anonymous", "message"]
-      newMessageObject = {
-        id: newMessage[0],
-        author: newMessage[1],
-        message: newMessage[2]
-      };
       allMessages.push(newMessage);
-      console.log(allMessages);
-      res.render("index", allMessages);
+      // allMessages[newMessage[0]] = {
+      //   id: newMessage[0],
+      //   author: newMessage[1],
+      //   message: newMessage[2]
+      // };
+
+      let messageObj = {
+        params: allMessages
+      };
+      console.log(newMessage);
+      console.log(messageObj);
+      res.render("index", messageObj);
     })
     .catch(error => {
       console.log(error);

@@ -12,12 +12,18 @@
 <div id="chat">
 
   <table>
-    {{#each allMessages as |message|}}
+    <!-- {{#each allMessages as |message|}}
+      {{#each message as |obj|}}
       <tr>
-        <td>message.message</td>
-        <td>by message.author</td>
+        <td>obj</td>
+        <td>obj</td>
       </tr>
+      {{/each}}
+    {{/each}} -->
+    {{#each allMessages}}
+    <div class = "row">{{message}}</div>
     {{/each}}
+
   </table>
 
 

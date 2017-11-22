@@ -25,11 +25,6 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-// 0: {
-//   id: 0
-//   author: anony
-//   message: hi there
-// }
 let totalMessages;
 let message;
 let allMessages = [];
@@ -54,19 +49,15 @@ app.post("/", (req, res) => {
     })
     .then(newMessage => {
       // ["1", "anonymous", "message"]
-      allMessages.push(newMessage);
-      // allMessages[newMessage[0]] = {
-      //   id: newMessage[0],
-      //   author: newMessage[1],
-      //   message: newMessage[2]
-      // };
-
-      let messageObj = {
-        params: allMessages
+      newMessageObject = {
+        id: newMessage[0],
+        author: newMessage[1],
+        message: newMessage[2]
       };
-      console.log(newMessage);
-      console.log(messageObj);
-      res.render("index", messageObj);
+      //allMessages[newMessage[0]] = newMessageObject;
+      allMessages.push(newMessageObject);
+      console.log(allMessages);
+      res.render("index", { allMessages: allMessages });
     })
     .catch(error => {
       console.log(error);
@@ -83,4 +74,12 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: err });
 });
 
-app.listen(3000);
+io.on("connection", client => {
+  client.on("newMessage", () => {
+    //find the last added object to redis
+    let newestMessage = allMessages[allMessages.length - 1];
+    console.log("NEW MESSAGE :" + newestMessage);
+  });
+});
+
+server.listen(3000);

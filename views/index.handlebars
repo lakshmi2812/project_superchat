@@ -3,21 +3,21 @@
   <table>
     <tr>
       <td><input type="text" name="message" /></td>
-      <td><input type='submit' /></td>
+      <td><input type='submit' id="submit"/></td>
     </tr>
   </table>
 
 </form>
-{{allMessages}}
 <div id="chat">
 
   <table>
-    {{#each params as |param|}}
-        <tr>
-          <td>param</td>
-          <td>param.message</td>
-          <td>by param.author</td>
-      </tr>
+    {{#each allMessages}}
+    <tr>
+      <td id="{{id}}">
+        {{author}}: {{message}}
+      </td>
+    </tr>
+
     {{/each}}
   </table>
 

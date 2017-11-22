@@ -1,0 +1,29 @@
+{
+  "name": "project_superchat",
+  "version": "1.0.0",
+  "description": "Build a realtime multi-room chat application. Make it super. Hi.. This is Lakshmi Maduri..",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lakshmi2812/project_superchat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lakshmi2812/project_superchat/issues"
+  },
+  "homepage": "https://github.com/lakshmi2812/project_superchat#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "redis": "^2.8.0",
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4"
+  }
+}

@@ -8,8 +8,15 @@
   </table>
 
 </form>
-
+{{allMessages}}
 
 <div>
-
+  {{#each allMessages as |message|}}
+  <table>
+    <tr>
+    <td>message.message</td>
+    <td>by message.author</td>
+  </tr>
+  </table>
+  {{/each}}
 </div>

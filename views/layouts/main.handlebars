@@ -27,11 +27,15 @@
   let test = "test"
   $('#submit').click(function(e) {
     socket.emit("newMessage", test);
-  })
+  });
+  socket.on("sendMsg", (newestMessage)=>{
+    console.log("Inside the socket");
+    $('#myTable').append('<tr><td>'+newestMessage.message+'</td></tr>');
+    //$("#myTable").append('<tr><td>newestMessage.message</td></tr>');
+  });
+
 
 </script>
-
-
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
